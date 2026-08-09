@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart Disease Predictor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Cardiac triage dashboard</span>
+          <h1>Heart Disease Prediction</h1>
+          <p>
+            Enter patient details, run the model, and review the latest saved
+            prediction records with a cleaner, faster clinical-style workflow.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <span class="stat-value">ML</span>
+            <span class="stat-label">Predictive model</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-value">Live</span>
+            <span class="stat-label">API integration</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <form id="prediction-form" class="card form-card">
+          <div class="form-header">
+            <div>
+              <h2>Patient information</h2>
+              <p>Fill in the required indicators to generate a risk estimate.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              Age
+              <input type="number" name="age" min="1" max="120" value="55" required />
+            </label>
+            <label>
+              Sex
+              <select name="sex" required>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+              </select>
+            </label>
+            <label>
+              Chest Pain Type
+              <select name="cp" required>
+                <option value="0">Typical Angina</option>
+                <option value="1">Atypical Angina</option>
+                <option value="2">Non-anginal Pain</option>
+                <option value="3">Asymptomatic</option>
+              </select>
+            </label>
+            <label>
+              Resting Blood Pressure
+              <input type="number" name="trestbps" value="140" required />
+            </label>
+            <label>
+              Cholesterol
+              <input type="number" name="chol" value="220" required />
+            </label>
+            <label>
+              Fasting Blood Sugar > 120
+              <select name="fbs" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </label>
+            <label>
+              Rest ECG
+              <select name="restecg" required>
+                <option value="0">Normal</option>
+                <option value="1">ST-T wave abnormality</option>
+                <option value="2">Left ventricular hypertrophy</option>
+              </select>
+            </label>
+            <label>
+              Max Heart Rate
+              <input type="number" name="thalach" value="150" required />
+            </label>
+            <label>
+              Exercise Induced Angina
+              <select name="exang" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </label>
+            <label>
+              Oldpeak
+              <input type="number" step="0.1" name="oldpeak" value="1.5" required />
+            </label>
+            <label>
+              Slope
+              <select name="slope" required>
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+              </select>
+            </label>
+            <label>
+              Major Vessels Colored
+              <input type="number" name="ca" min="0" max="4" value="0" required />
+            </label>
+            <label>
+              Thalassemia
+              <select name="thal" required>
+                <option value="1">Normal</option>
+                <option value="2">Fixed defect</option>
+                <option value="3">Reversible defect</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn-primary">Predict</button>
+            <button type="button" id="load-sample" class="btn-secondary">Load Random Sample</button>
+          </div>
+        </form>
+
+        <aside class="card result-card">
+          <div class="result-header">
+            <h2>Prediction Result</h2>
+            <span class="status-dot"></span>
+          </div>
+          <div id="result-message" class="result-message" aria-live="polite">
+            Waiting for patient input...
+          </div>
+          <div class="risk-box">
+            <div id="risk-score">0%</div>
+            <div id="risk-label">No result yet</div>
+          </div>
+          <div class="history-wrap">
+            <h3>Recent Saved Records</h3>
+            <ul id="history-list" class="history-list"></ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

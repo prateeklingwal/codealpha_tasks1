@@ -1,0 +1,460 @@
+# Heart Disease Prediction System Using Machine Learning
+
+## 1. Project Title
+
+**Heart Disease Prediction System Using Machine Learning and Web-Based Clinical Dashboard**
+
+---
+
+# 2. Abstract
+
+Heart disease is one of the leading causes of death worldwide. Early prediction of cardiovascular diseases can significantly improve patient care by enabling timely diagnosis and treatment. This project presents a web-based Heart Disease Prediction System that utilizes Machine Learning to estimate the likelihood of heart disease based on various clinical parameters.
+
+The application combines a trained Random Forest Machine Learning model with a lightweight Python backend and an interactive web interface. Users enter patient information such as age, cholesterol level, blood pressure, chest pain type, ECG results, and other medical indicators. The trained model analyzes these features and predicts the probability of heart disease while classifying the patient into Low Risk, Moderate Risk, or High Risk categories.
+
+The application also stores previous prediction records in a SQLite database, allowing users to review recent assessments. The overall system demonstrates the practical integration of Artificial Intelligence, Machine Learning, Backend Development, Database Management, and Frontend Web Technologies into a single healthcare application.
+
+---
+
+# 3. Introduction
+
+Heart disease remains one of the most serious health challenges globally. Traditional diagnosis often requires multiple laboratory tests and expert medical analysis. Machine Learning techniques can assist healthcare professionals by identifying hidden patterns within patient data and providing quick preliminary predictions.
+
+The objective of this project is to develop an intelligent decision support system capable of predicting heart disease risk using patient clinical information. The application provides an easy-to-use graphical interface while maintaining efficient backend processing for real-time predictions.
+
+The system is designed primarily for educational purposes and demonstrates how Machine Learning can be integrated into modern healthcare applications.
+
+---
+
+# 4. Objectives
+
+The primary objectives of this project are:
+
+* Predict heart disease using Machine Learning.
+* Build a complete web-based healthcare application.
+* Provide instant prediction results based on patient information.
+* Store prediction history for future reference.
+* Demonstrate the practical implementation of AI in healthcare.
+* Create a lightweight and efficient prediction system without requiring heavy web frameworks.
+
+---
+
+# 5. Technologies Used
+
+## Programming Languages
+
+* Python 3
+* JavaScript
+* HTML5
+* CSS3
+
+## Machine Learning Libraries
+
+* Scikit-learn
+* Pandas
+* Joblib
+* UCI ML Repository API (ucimlrepo)
+
+## Backend Technologies
+
+* Python HTTPServer
+* BaseHTTPRequestHandler
+* JSON API
+
+## Database
+
+* SQLite3
+
+## Frontend Technologies
+
+* HTML
+* CSS
+* JavaScript
+* Fetch API
+
+## Development Tools
+
+* Visual Studio Code
+* Python
+* Web Browser
+
+---
+
+# 6. Dataset Used
+
+The project uses the **Heart Disease Dataset** obtained from the **UCI Machine Learning Repository**.
+
+The dataset contains several medical attributes collected from patients.
+
+### Important Features
+
+* Age
+* Sex
+* Chest Pain Type (CP)
+* Resting Blood Pressure
+* Cholesterol
+* Fasting Blood Sugar
+* Resting ECG
+* Maximum Heart Rate
+* Exercise Induced Angina
+* Oldpeak
+* Slope
+* Number of Major Vessels (CA)
+* Thalassemia
+* Target (Heart Disease)
+
+The target variable is converted into a binary classification problem:
+
+* **0 → No Heart Disease**
+* **1 → Heart Disease**
+
+---
+
+# 7. Machine Learning Model
+
+The prediction model is developed using the **Random Forest Classifier**.
+
+### Why Random Forest?
+
+Random Forest is selected because:
+
+* High prediction accuracy
+* Handles missing values effectively
+* Reduces overfitting
+* Works well with medical datasets
+* Robust against noisy data
+* Provides probability estimates
+
+---
+
+# 8. Model Training Process
+
+The model training process consists of the following steps:
+
+### Step 1
+
+Load the Heart Disease Dataset from the UCI Repository.
+
+### Step 2
+
+Separate the dataset into:
+
+* Features (X)
+* Target (Y)
+
+### Step 3
+
+Split the dataset:
+
+* 80% Training Data
+* 20% Testing Data
+
+### Step 4
+
+Build a preprocessing pipeline consisting of:
+
+* Missing value imputation using median values
+* Feature standardization
+* Random Forest classifier
+
+### Step 5
+
+Train the model.
+
+### Step 6
+
+Evaluate the model using prediction accuracy.
+
+### Step 7
+
+Save the trained model using Joblib.
+
+### Step 8
+
+Store feature order and model metadata in a JSON file.
+
+---
+
+# 9. System Architecture
+
+The system follows a three-layer architecture.
+
+```
+User
+   │
+   ▼
+Frontend (HTML, CSS, JavaScript)
+   │
+   ▼
+Python Backend API
+   │
+   ▼
+Machine Learning Model
+   │
+   ▼
+Prediction Result
+   │
+   ▼
+SQLite Database
+```
+
+---
+
+# 10. Working of the System
+
+## Step 1
+
+The user opens the Heart Disease Prediction webpage.
+
+## Step 2
+
+Patient information is entered into the prediction form.
+
+The system collects medical details including:
+
+* Age
+* Gender
+* Blood Pressure
+* Cholesterol
+* Chest Pain Type
+* ECG Result
+* Heart Rate
+* Exercise Angina
+* Oldpeak
+* Thalassemia
+
+## Step 3
+
+The JavaScript application converts all form values into JSON format.
+
+## Step 4
+
+The JSON data is sent to the Python backend using a POST request.
+
+```
+POST /api/predict
+```
+
+## Step 5
+
+The backend receives the patient information.
+
+## Step 6
+
+The trained Machine Learning model is loaded using Joblib.
+
+## Step 7
+
+The patient information is converted into a Pandas DataFrame.
+
+## Step 8
+
+The feature order is matched with the order used during training.
+
+## Step 9
+
+The Random Forest model predicts:
+
+* Disease Class
+* Probability Score
+
+## Step 10
+
+The probability is converted into a percentage called the Risk Score.
+
+Example:
+
+```
+Probability = 0.81
+
+Risk Score = 81%
+```
+
+## Step 11
+
+The system assigns a prediction label.
+
+### Low Risk
+
+Prediction = 0
+
+### Moderate Risk
+
+Prediction = 1 and Risk Score below 60%
+
+### High Risk
+
+Prediction = 1 and Risk Score greater than or equal to 60%
+
+## Step 12
+
+The prediction is stored inside the SQLite database.
+
+Saved information includes:
+
+* Patient data
+* Risk score
+* Prediction label
+* Timestamp
+
+## Step 13
+
+The backend returns the prediction to the frontend.
+
+Example response:
+
+```
+{
+    "risk_score": 82,
+    "label": "High risk"
+}
+```
+
+## Step 14
+
+The webpage immediately updates and displays:
+
+* Risk Percentage
+* Risk Category
+* Recent Prediction History
+
+---
+
+# 11. Backend Implementation
+
+The backend is developed using Python's built-in HTTP server.
+
+Major API Endpoints:
+
+## POST /api/predict
+
+Receives patient information and returns prediction.
+
+## GET /api/history
+
+Returns the latest prediction history.
+
+## OPTIONS
+
+Supports Cross-Origin Resource Sharing (CORS).
+
+The backend also performs:
+
+* Model loading
+* Prediction generation
+* Database insertion
+* JSON response creation
+
+---
+
+# 12. Database Design
+
+SQLite is used to store prediction history.
+
+The database table contains:
+
+* Patient Age
+* Gender
+* Chest Pain Type
+* Blood Pressure
+* Cholesterol
+* Blood Sugar
+* ECG
+* Heart Rate
+* Exercise Angina
+* Oldpeak
+* Slope
+* Major Vessels
+* Thalassemia
+* Risk Score
+* Prediction Label
+* Complete JSON Record
+* Timestamp
+
+The database allows retrieval of recent prediction records for display on the dashboard.
+
+---
+
+# 13. Frontend Design
+
+The frontend is developed using HTML, CSS, and JavaScript.
+
+Major components include:
+
+* Hero Dashboard
+* Patient Information Form
+* Prediction Button
+* Random Sample Loader
+* Risk Display Card
+* Prediction History Panel
+
+The interface dynamically changes colors according to prediction results:
+
+* Green → Low Risk
+* Yellow → Moderate Risk
+* Red → High Risk
+
+This improves visual interpretation of prediction results.
+
+---
+
+# 14. Features of the System
+
+* User-friendly interface
+* Machine Learning prediction
+* Real-time API communication
+* Probability-based risk estimation
+* Automatic prediction history
+* Lightweight backend server
+* SQLite database integration
+* Responsive web interface
+* Random sample patient generator
+* Clinical dashboard appearance
+
+---
+
+# 15. Advantages
+
+* Fast prediction results
+* Easy to use
+* Low system requirements
+* No heavy backend framework required
+* Accurate Machine Learning classification
+* Stores historical predictions
+* Modular architecture
+* Easy to extend with new models
+
+---
+
+# 16. Limitations
+
+* Uses only the UCI Heart Disease dataset.
+* Prediction should not replace professional medical diagnosis.
+* No authentication system.
+* Single-user local deployment.
+* Limited clinical features compared with real hospital systems.
+
+---
+
+# 17. Future Enhancements
+
+Future improvements may include:
+
+* Deep Learning-based prediction models.
+* User authentication and role management.
+* Cloud deployment.
+* Integration with Electronic Health Records (EHR).
+* PDF report generation.
+* Doctor recommendation module.
+* Explainable AI (XAI) to show feature importance.
+* Mobile application support.
+* Real-time patient monitoring.
+* Multi-disease prediction system.
+
+---
+
+# 18. Conclusion
+
+The Heart Disease Prediction System successfully demonstrates the integration of Machine Learning with modern web technologies to provide a practical healthcare decision support application. The Random Forest classifier is trained using the UCI Heart Disease dataset and achieves reliable predictions through preprocessing, feature standardization, and ensemble learning techniques.
+
+The backend efficiently processes prediction requests, while the SQLite database maintains historical records for future reference. The responsive frontend offers an intuitive interface for entering patient information and viewing prediction results. Overall, the project highlights how Artificial Intelligence can assist healthcare professionals by providing fast, data-driven risk assessments while serving as a strong example of full-stack machine learning application development.

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Local database (optional — remove this line if you want to commit history)
+database/*.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
